@@ -2,10 +2,13 @@ import discord
 from datetime import datetime
 
 class Ping:
-    def __init__(self):
-        pass
 
-    async def execute(self, message):
+    alias = ['ping']
+
+    def __init__(self, bot_client):
+        self.bot_client = bot_client
+
+    async def execute(self, message, args):
 
         ping_start = message.created_at
 

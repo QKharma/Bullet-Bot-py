@@ -1,0 +1,7 @@
+.env
+.vscode
+.config
+config/config.json
+__pycache__
+log
+database

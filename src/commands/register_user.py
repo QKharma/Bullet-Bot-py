@@ -4,10 +4,13 @@ from entities.user import User
 
 class RegisterUser:
 
-    def __init__(self):
-        self.UserModel = User()
+    alias = ['register']
 
-    async def execute(self, message):
+    def __init__(self, bot_client):
+        self.UserModel = User()
+        self.bot_client = bot_client
+
+    async def execute(self, message, args):
 
         author_id = message.author.id
 
