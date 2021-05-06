@@ -31,7 +31,11 @@ class Bot:
     def load_commands(self):
 
         command_files = os.listdir('./src/commands')
-        command_files.remove('__pycache__')
+
+        try:
+            command_files.remove('__pycache__')
+        except ValueError:
+            pass
 
         command_filesCleaned = []
         for item in command_files:
