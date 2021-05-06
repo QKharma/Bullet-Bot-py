@@ -1,42 +1,47 @@
 import discord
-import schedule
 import time
-import threading
+from discord.ext import tasks, commands
 
 class SendReminder:
 
-    alias = ['send-reminder']
+    alias = ['send-reminder', 'sr']
 
     def __init__(self, bot_client):
         self.bot_client = bot_client
-        self.schedstop = None
-        self.schedthread = None
-
-    def create_schedule_tread(self):
-        self.schedstop = threading.Event()
-
-        def timer():
-            while not self.schedstop.is_set():
-                schedule.run_pending()
-                time.sleep(3)
-
-        self.schedthread = threading.Thread(target=timer)
-        self.schedthread.start()
-
-    def close_schedule_thread(self):
-        self.schedstop.set()
-
-    async def reminder(self, user):
-
-        if not user.dm_channel:
-            await user.create_dm()
-
-        await user.dm_channel.send("blablabla")
+        self.threads = {}
 
     async def execute(self, message, args):
 
-        schedule.every(10).seconds.do(self.call_async, user=message.author)
+        self.message = message
+        self.args = args
 
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
+        if self.args == []:
+            await message.channel.send("```missing argument: send-reminder <start|stop>```")
+        else:
+            if self.args[0] == 'start':
+                self.start_reminder()
+            elif self.args[0] == 'stop':
+                self.stop_reminder()
+
+    def start_reminder(self):
+
+        self.threads[self.message.author.id] = Reminder(self.message)
+        self.threads[self.message.author.id].reminder.start()
+
+    def stop_reminder(self):
+
+        self.threads[self.message.author.id].reminder.cancel()
+
+class Reminder():
+
+    def __init__(self, message):
+        self.message = message
+
+    @tasks.loop(seconds=10)
+    async def reminder(self):
+
+        if True:
+            if not self.message.author.dm_channel:
+                await self.message.author.create_dm()
+
+            await self.message.author.dm_channel.send("blablabla")

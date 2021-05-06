@@ -17,14 +17,16 @@ class MessageListener:
 
         if message.content.startswith('-'):
 
+            command = None
+
             command_name, *args = message.content[1:].split()
-            
+
             for c_name, c_instance in commands.items():
                 if c_name == command_name:
                     command = c_instance
                 elif command_name in c_instance.alias:
                     command = c_instance
-            
+
             if command is None:
                 return
             else:

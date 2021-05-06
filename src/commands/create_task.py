@@ -5,7 +5,7 @@ from entities.task import Task
 
 class CreateTask:
 
-    alias = ['create-task']
+    alias = ['create-task', 'ct']
 
     def __init__(self, bot_client):
         self.UserModel = User()
