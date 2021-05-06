@@ -26,10 +26,7 @@ class Bot:
 
         self.define_events()
 
-        with open('./.config/config.json') as f:
-            data = json.load(f)
-
-        self.client.run(data['bot_token'])
+        self.client.run(os.environ.get('BULLET_BOT_TOKEN'))
 
     def load_commands(self):
 
