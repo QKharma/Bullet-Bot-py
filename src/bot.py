@@ -17,7 +17,7 @@ class Bot:
 
     def __init__(self):
         self.client = discord.Client()
-        self.message_listener = MessageListener(self, prefix='-')
+        self.message_listener = MessageListener(self, prefix='.')
         self.commands = self.load_commands()
 
     def start(self):

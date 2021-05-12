@@ -15,7 +15,7 @@ class MessageListener:
         if message.author.bot:
             return
 
-        if message.content.startswith('-'):
+        if message.content.startswith(self.prefix):
 
             command = None
 

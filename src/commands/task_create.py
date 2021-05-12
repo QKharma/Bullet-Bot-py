@@ -3,7 +3,7 @@ import discord
 from entities.user import User
 from entities.task import Task
 
-class CreateTask:
+class TaskCreate:
 
     alias = ['create-task', 'ct']
 

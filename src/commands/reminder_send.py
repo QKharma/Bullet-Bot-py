@@ -2,7 +2,7 @@ import discord
 import time
 from discord.ext import tasks, commands
 
-class SendReminder:
+class ReminderSend:
 
     alias = ['send-reminder', 'sr']
 
@@ -23,7 +23,7 @@ class SendReminder:
             elif self.args[0] == 'stop':
                 self.stop_reminder()
 
-    def start_reminder(self):
+    async def start_reminder(self):
 
         self.threads[self.message.author.id] = Reminder(self.message)
         self.threads[self.message.author.id].reminder.start()
