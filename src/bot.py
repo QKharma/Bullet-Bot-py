@@ -1,8 +1,6 @@
 import sys
 import os
 import discord
-import json
-import logging
 import importlib
 
 from peewee import SqliteDatabase

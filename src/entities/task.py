@@ -1,4 +1,4 @@
-from peewee import Model, CharField, IntegerField, DateField, TimeField, ForeignKeyField
+from peewee import CharField, DateField, TimeField, ForeignKeyField
 from entities.base_entity import BaseEntity
 from entities.user import User
 

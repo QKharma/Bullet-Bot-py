@@ -11,7 +11,7 @@ class EmbedTest:
     async def execute(self, message, args):
 
         def check_reaction(reaction, user):
-            return user == message.author and str(reaction.emoji) == ":uhoh:787702074473316383"
+            return user == message.author and str(reaction.emoji) == "<:uhoh:787702074473316383>"
 
         
         self.embed = discord.Embed(title='Test', description='bruh', color=0x00ff00)
@@ -21,12 +21,10 @@ class EmbedTest:
         sent_embed = await message.channel.send(embed=self.embed)
         await sent_embed.add_reaction(":uhoh:787702074473316383")
 
-        reaction, user = await self.bot_client.wait_for('reaction_add', check=check_reaction)
-
         try:
             reaction, user = await self.bot_client.wait_for('reaction_add', timeout=60.0, check=check_reaction)
         except asyncio.TimeoutError:
             await message.channel.send('👎')
         else:
-            await message.channel.send('👍')
+            await message.channel.send("<:uhoh:787702074473316383>")
 
